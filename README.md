@@ -23,4 +23,4 @@ Using this script yourself is simple. Just follow these steps:
 
 
 ### Running on a server
-I setup this project for myself on a QNAP NAS device, and I have full documentation for everything you'll need to also do so in the file "Documentation.rtf". Essentially what you need to do is set up your python environment on your server and then schedule a cron job to run the script however often you want.
+I set up this project for myself on a QNAP NAS device, and I have full documentation for everything you'll need to also do so in the file "Documentation.rtf". Essentially what you need to do is set up your python environment on your server and then schedule a cron job to run the script however often you want.
