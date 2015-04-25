@@ -86,17 +86,7 @@ if currentTime[3] >= 7 and currentTime[3] <= 22:
 	# scanPage('http://www.cbc.ca/cmlink/rss-canada-kitchenerwaterloo')
 
 	print link
-else:
-	print currentTime
 
-
-fw = open(storageFile, 'w')
-pickle.dump(seenHeadlines, fw)
-fw.close()
-
-
-# Goes under "print link"
-'''
 	if link != "":
 		# Send myself email
 		print "Sending email!"
@@ -114,4 +104,10 @@ fw.close()
 		                  params=payload_send)
 
 		print m.text
-'''
+else:
+	print currentTime
+
+
+fw = open(storageFile, 'w')
+pickle.dump(seenHeadlines, fw)
+fw.close()
