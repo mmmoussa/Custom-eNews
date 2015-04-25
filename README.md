@@ -5,6 +5,7 @@ Custom eNews is a script which will read through CBC pages that you specify and 
 For my personal setup, I have put this project on a server and scheduled a cron job to run every few minutes, meaning that I am constatnly up-to-date with events that I'm interested in.
 
 
+
 ### Using this project for yourself
 Using this script yourself is simple. Just follow these steps:
 
@@ -24,3 +25,8 @@ Using this script yourself is simple. Just follow these steps:
 
 ### Running on a server
 I set up this project for myself on a QNAP NAS device, and I have full documentation for everything you'll need to also do so in the file "Documentation.rtf". Essentially what you need to do is set up your python environment on your server and then schedule a cron job to run the script however often you want.
+
+
+
+### Old vs. New Implementations
+Initially, the task of identifying headlines and their associated details was accomplished by requesting the correct web pages, parsing the html using identified patterns, and then processing the details. The current implementation actually relies on requesting the xml files from the rss feeds that CBC supplies, and from these, more headline information can be obtained from a simpler process. Feel free to check out the old implementation, but I strongly suggest you use the current one.
