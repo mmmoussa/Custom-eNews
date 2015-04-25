@@ -1,3 +1,4 @@
 *.pyc
 .DS_Store
 news_settings.py
+*.data
