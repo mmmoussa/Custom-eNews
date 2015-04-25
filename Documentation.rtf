@@ -18,14 +18,12 @@ ls -l /usr/bin/python
 \f0  \
 	4. Piece of output after \'93/share/\'93 is data location to use.\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\fs28 \cf0 \kerning1\expnd0\expndtw0 \ul \ulc0 Installing Pip
+\fs28 \cf0 \kerning1\expnd0\expndtw0 \ul Installing Pip
 \fs24 \ulnone \
 	1. \cf2 \expnd0\expndtw0\kerning0
 Download pip using correct version: 
-\f1 \cf2 \expnd0\expndtw0\kerning0
-curl -O https://pypi.python.org/packages/source/p/pip/pip-6.1.1.tar.gz -k
+\f1 curl -O https://pypi.python.org/packages/source/p/pip/pip-6.1.1.tar.gz -k
 \f0  \cf0 \kerning1\expnd0\expndtw0 \
 	2. Extract pip: 
 \f1 \cf2 \expnd0\expndtw0\kerning0
@@ -34,45 +32,36 @@ tar xf pip-6.1.1.tar.gz
 	3. Go into pip folder: 
 \f1 \cf2 \expnd0\expndtw0\kerning0
 cd pip-6.1.1
-\f0 \cf2 \expnd0\expndtw0\kerning0
-\
+\f0 \
 \cf0 \kerning1\expnd0\expndtw0 \
 
-\fs28 \ul \ulc0 Installing Setuptools
+\fs28 \ul Installing Setuptools
 \fs24 \ulnone \
 	1. \cf2 \expnd0\expndtw0\kerning0
 Download setuptools using correct version: 
-\f1 curl -O \cf2 \expnd0\expndtw0\kerning0
-https://pypi.python.org/packages/source/s/setuptools/setuptools-15.1.tar.gz\cf2 \expnd0\expndtw0\kerning0
- -k
+\f1 curl -O https://pypi.python.org/packages/source/s/setuptools/setuptools-15.1.tar.gz -k
 \f0  \cf0 \kerning1\expnd0\expndtw0 \
 	2. Extract setuptools: 
 \f1 \cf2 \expnd0\expndtw0\kerning0
-tar xf \cf2 \expnd0\expndtw0\kerning0
-setuptools-15.1.tar.gz
+tar xf setuptools-15.1.tar.gz
 \f0 \cf0 \kerning1\expnd0\expndtw0 \
 	3. Go into pip folder: 
 \f1 \cf2 \expnd0\expndtw0\kerning0
-cd \cf2 \expnd0\expndtw0\kerning0
-setuptools-15.1
-\f0 \cf2 \expnd0\expndtw0\kerning0
-\
+cd setuptools-15.1
+\f0 \
 	4. 
 \f1 python setup.py build
 \f0 \
 	5. 
 \f1 python setup.py install
 \f0 \cf0 \kerning1\expnd0\expndtw0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\
 
-\fs28 \cf0 \ul \ulc0 Installing Pip
+\fs28 \ul Adding Symbolic Links For Pip
 \fs24 \ulnone \
 	1. \cf2 \expnd0\expndtw0\kerning0
-Edit file with symbolic links, using python data location: 
-\f1 \cf2 \expnd0\expndtw0\kerning0
-vim\'a0/share/HDA_DATA/.qpkg/Python/python.sh
+Open file with symbolic links for editing, using python data location: 
+\f1 vim\'a0/share/HDA_DATA/.qpkg/Python/python.sh
 \f0 \cf0 \kerning1\expnd0\expndtw0 \
 	2. \cf2 \expnd0\expndtw0\kerning0
 Insert following two statements in "#create symbolic links" section\cf0 \kerning1\expnd0\expndtw0 :
@@ -80,19 +69,16 @@ Insert following two statements in "#create symbolic links" section\cf0 \kerning
 \
 
 \f0 		
-\f1 \cf2 \expnd0\expndtw0\kerning0
-/bin/ln -sf $\{QPKG_BASE\}/.qpkg/Python/bin/pip /usr/bin/pip\
+\f1 /bin/ln -sf $\{QPKG_BASE\}/.qpkg/Python/bin/pip /usr/bin/pip\
 		/bin/ln -sf $\{QPKG_BASE\}/.qpkg/Python/bin/pip-2.7 /usr/bin/pip-2.7
 \f0 \cf0 \kerning1\expnd0\expndtw0 \
 	3. Restart python: 
 \f1 \cf2 \expnd0\expndtw0\kerning0
 /share/HDA_DATA/.qpkg/Python/python.sh restart
 \f0 \cf0 \kerning1\expnd0\expndtw0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\
 
-\fs28 \cf0 \ul \ulc0 Installing Packages Using Pip
+\fs28 \ul Installing Packages Using Pip
 \fs24 \ulnone \
 	1. \cf2 \expnd0\expndtw0\kerning0
 Download package using correct version: 
@@ -100,16 +86,35 @@ Download package using correct version:
 \f0  \cf0 \kerning1\expnd0\expndtw0 \
 	2. Install package: 
 \f1 \cf2 \expnd0\expndtw0\kerning0
-pip install \cf2 \expnd0\expndtw0\kerning0
-beautifulsoup4-4.3.2.tar.gz
+pip install beautifulsoup4-4.3.2.tar.gz
 \f0 \cf0 \kerning1\expnd0\expndtw0 \
 \
 
-\fs28 \ul \ulc0 Notes
+\fs28 \ul Setting Up A Cron Job
 \fs24 \ulnone \
 	1. \cf2 \expnd0\expndtw0\kerning0
-If you ever get an error message mentioning \'93six\'94 while trying to install a package through pip, install the python package \'93six\'94 through pip\cf0 \kerning1\expnd0\expndtw0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \
+Open crontab for editing: 
+\f1 \cf2 \expnd0\expndtw0\kerning0
+vim\'a0\cf0 \expnd0\expndtw0\kerning0
+/etc/config/crontab
+\f0\fs26 \
+
+\fs24 \kerning1\expnd0\expndtw0 	2. Add line for the new cron job in the file\
+	3. Load the changes: 
+\f1 \expnd0\expndtw0\kerning0
+crontab /etc/config/crontab
+\f0 \cf2 \expnd0\expndtw0\kerning0
+\
+	4. Restart cron: 
+\f1 \cf0 \expnd0\expndtw0\kerning0
+/etc/init.d/crond.sh restart
+\f0 \kerning1\expnd0\expndtw0 \
+\
+
+\fs28 \ul Notes
+\fs24 \ulnone \
+	1. \cf2 \expnd0\expndtw0\kerning0
+If you ever get an error message mentioning \'93six\'94 while trying to install a package through pip, install the python package \'93six\'94 through pip first\cf0 \kerning1\expnd0\expndtw0 \
+\
 \
 }
