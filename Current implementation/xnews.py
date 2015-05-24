@@ -118,7 +118,7 @@ try:
 		else:
 			hour = str(currentTime[3])
 			meridian = "am"
-		if str(currentTime[4]) < 10:
+		if currentTime[4] < 10:
 			minute = "0" + str(currentTime[4])
 		else:
 			minute = str(currentTime[4])
@@ -144,9 +144,6 @@ try:
 			print time + str(m.text)
 		else:
 			print time + "No message to send."
-	else:
-		print currentTime
-
 
 	fw = open(storageFile, 'w')
 	pickle.dump(seenHeadlines, fw)
