@@ -9,7 +9,7 @@ from news_settings import *
 
 
 try:
-	# Start of news reader
+	# Get the list of headlines already seen
 	storageFile = 'articles.data'
 	serverStorageFile = '/share/mohamed/news_scraper/articles.data'
 	try:
@@ -27,6 +27,23 @@ try:
 	# Required global variables
 	link = ""
 	currentTime = time.localtime(time.time())
+
+	# Creating readable time
+	month = str(currentTime[1])
+	day = str(currentTime[2])
+	year = str(currentTime[0])
+	if currentTime[3] > 12:
+		hour = str(currentTime[3] - 12)
+		meridian = "pm"
+	else:
+		hour = str(currentTime[3])
+		meridian = "am"
+	if currentTime[4] < 10:
+		minute = "0" + str(currentTime[4])
+	else:
+		minute = str(currentTime[4])
+	minute = str(currentTime[4])
+	time = hour + ":" + minute + meridian + ", " + month + "/" + day + "/" + year + ": "
 
 
 
@@ -47,52 +64,33 @@ try:
 
 		r = requests.get(url)
 		if r.status_code == 200:
-			try:
-				# print "Got page: " + url
+			# print "Got page: " + url
 
-				root = ET.fromstring(r.content)
-				# print prettify(root)
-				# print "\n\n\n\n\n"
+			root = ET.fromstring(r.content)
+			# print prettify(root)
+			# print "\n\n\n\n\n"
 
-				topic = re.search('http://www.cbc.ca/cmlink/rss-(.+)', url).group(1).title()
+			topic = re.search('http://www.cbc.ca/cmlink/rss-(.+)', url).group(1).title()
 
-				headlines = root.findall('.//item')
-				# print len(headlines)
+			headlines = root.findall('.//item')
+			# print len(headlines)
 
-				for headline in headlines:
-					title = headline.find('title').text
-					source = headline.find('link').text[:-8]
-					allDescription = headline.find('description').text
-					description = re.search('<p>(.+?)</p>', allDescription).group(1)
+			for headline in headlines:
+				title = headline.find('title').text
+				source = headline.find('link').text[:-8]
+				allDescription = headline.find('description').text
+				description = re.search('<p>(.+?)</p>', allDescription).group(1)
 
-					for word in flaggedWords:
-						if (findWholeWord(word)(title)) or (findWholeWord(word)(description)):
-							if source not in seenHeadlines:
-								article = "Headline: " + title + "\n\nDescription: " + description + "\n\nTopic: " + topic + "\n\nFlagged word: " + word.title() + "\n\nLink: " + source + "\n\n\n\n"
-								link += article
-								seenHeadlines.append(source)
-			except:
-				with open("errors.txt", "a") as myfile:
-					month = str(currentTime[1])
-					day = str(currentTime[2])
-					year = str(currentTime[0])
-					if currentTime[3] > 12:
-						hour = str(currentTime[3] - 12)
-						meridian = "pm"
-					else:
-						hour = str(currentTime[3])
-						meridian = "am"
-					if str(currentTime[4]) < 10:
-						minute = "0" + str(currentTime[4])
-					else:
-						minute = str(currentTime[4])
-					minute = str(currentTime[4])
-					time = hour + ":" + minute + meridian + ", " + month + "/" + day + "/" + year + ": "
-					log = time + url + "\n"
-					print log
-					myfile.write(log)
+				for word in flaggedWords:
+					if (findWholeWord(word)(title)) or (findWholeWord(word)(description)):
+						if source not in seenHeadlines:
+							article = "Headline: " + title + "\n\nDescription: " + description + "\n\nTopic: " + topic + "\n\nFlagged word: " + word.title() + "\n\nLink: " + source + "\n\n\n\n"
+							link += article
+							seenHeadlines.append(source)
 		else:
 			print "Failed request"
+
+
 
 	if currentTime[3] >= 7 and currentTime[3] <= 22:
 		scanPage('http://www.cbc.ca/cmlink/rss-topstories')
@@ -108,22 +106,6 @@ try:
 		# scanPage('http://www.cbc.ca/cmlink/rss-canada-kitchenerwaterloo')
 
 		# print link
-
-		month = str(currentTime[1])
-		day = str(currentTime[2])
-		year = str(currentTime[0])
-		if currentTime[3] > 12:
-			hour = str(currentTime[3] - 12)
-			meridian = "pm"
-		else:
-			hour = str(currentTime[3])
-			meridian = "am"
-		if currentTime[4] < 10:
-			minute = "0" + str(currentTime[4])
-		else:
-			minute = str(currentTime[4])
-		minute = str(currentTime[4])
-		time = hour + ":" + minute + meridian + ", " + month + "/" + day + "/" + year + ": "
 
 		if link != "":
 			# Send myself email
@@ -145,6 +127,9 @@ try:
 		else:
 			print time + "No message to send."
 
+
+
+	# Store list of seen headlines along with any new ones
 	fw = open(storageFile, 'w')
 	pickle.dump(seenHeadlines, fw)
 	fw.close()
